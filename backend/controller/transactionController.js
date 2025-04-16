@@ -1,3 +1,4 @@
+import { getMonthName } from "../libs/authValidation.js";
 import { db } from "../libs/database.js";
 
 export const getTransactions = async (req, res) => {
@@ -53,10 +54,9 @@ export const getDashboard = async (req, res) => {
     
         const availableBalance = totalIncome - totalExpense;
     
-        // Aggregate transactions to sum by type and group by month
         const year = new Date().getFullYear();
-        const start_Date = new Date(year, 0, 1); // January 1st of the year
-        const end_Date = new Date(year, 11, 31, 23, 59, 59); // December 31st of the year
+        const start_Date = new Date(year, 0, 1); 
+        const end_Date = new Date(year, 11, 31, 23, 59, 59); 
     
         const result = await db.query({
           text: `
@@ -107,7 +107,6 @@ export const getDashboard = async (req, res) => {
         const lastAccount = lastAccountResult.rows;
     
         res.status(200).json({
-          status: "success",
           availableBalance,
           totalIncome,
           totalExpense,
@@ -117,7 +116,7 @@ export const getDashboard = async (req, res) => {
         });
       } catch (error) {
         console.log(error);
-        res.status(500).json({ status: "failed", message: error.message });
+        res.status(500).json({ message: error.message });
       }
     };
 

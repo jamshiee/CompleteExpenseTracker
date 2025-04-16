@@ -98,7 +98,7 @@ export const addMoney = async (req, res) => {
       values: [
         userId,
         description,
-        "income",
+        "Income",
         "completed",
         amount,
         account.account_name,
