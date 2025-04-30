@@ -3,8 +3,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Signin from "./pages/auth/signin";
 import Signup from "./pages/auth/Signup";
 import Dashboard from "./pages/dashboard";
-import Transactions from "./pages/Transactions";
-import Settings from "./pages/Settings";
+import Transactions from "./pages/transactions";
 import Account from "./pages/Account";
 import useStore from "./store/index";
 import Navbar from "./components/ui/navbar";
@@ -24,7 +23,7 @@ const RootLayout = () => {
 
 function App() {
   return (
-    <div className="w-full min-h-screen bg-gray-100 max-w-screen overflow-x-hidden   ">
+    <div className="w-full min-h-screen bg-gray-100 max-w-screen overflow-x-hidden ">
       {/* px-6  md:px-20 */}
       <Routes>
         
@@ -41,7 +40,6 @@ function App() {
           <Route path="/" element={<Navigate to="/overview" />} />
           <Route path="/overview" element={<Dashboard />} />
           <Route path="/transactions" element={<Transactions />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/account" element={<Account />} />
         </Route>
 

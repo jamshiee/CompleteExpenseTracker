@@ -207,7 +207,7 @@ const Account = () => {
                 <div className="flex flex-col items-center">
                   <h2 className="text-3xl font-semibold mb-5">Pay </h2>
 
-                  <div className="flex flex-col mt-3 ">
+                  <div className="flex flex-col mt-3  ">
                     <label className="font-medium mb-1">Select Account</label>
 
                     <div className="relative">
