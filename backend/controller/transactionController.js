@@ -3,21 +3,23 @@ import { db } from "../libs/database.js";
 
 export const getTransactions = async (req, res) => {
   try {
-    const today = new Date();
-    const _sevenDaysAgo = new Date(today);
-    _sevenDaysAgo.setDate(today.getDate() - 7);
-
-    const sevenDaysAgo = _sevenDaysAgo.toISOString().split("T")[0];
-
-    const { df, dt, s } = req.query;
+    const { s } = req.query;
     const { userId } = req.user;
 
-    const startDate = new Date(df || sevenDaysAgo);
-    const endDate = new Date(dt || new Date());
+  
 
     const transactions = await db.query({
-      text: "SELECT * FROM tbltransaction WHERE user_id = $1 AND createdat BETWEEN $2 AND $3 OR (description ILIKE '%' || $4 || '%' OR status ILIKE '%'  || $4 || '%' OR source ILIKE '%' || $4 || '%') ORDER BY id DESC ",
-      values: [userId, startDate, endDate, s],
+      text: `
+        SELECT * FROM tbltransaction 
+        WHERE user_id = $1 
+        AND (
+          description ILIKE '%' || $2 || '%' 
+          OR status ILIKE '%' || $2 || '%' 
+          OR source ILIKE '%' || $2 || '%'
+        ) 
+        ORDER BY id DESC
+      `,
+      values: [userId, s || ""], // default to empty string to match all
     });
 
     res.status(200).json({
@@ -29,12 +31,13 @@ export const getTransactions = async (req, res) => {
   }
 };
 
+
 export const getDashboard = async (req, res) => {
     try {
         const { userId } = req.user;
     
-        let totalIncome = 0;
-        let totalExpense = 0;
+        let totalIncome = "";
+        let totalExpense = "";
     
         const transactionsResult = await db.query({
           text: `SELECT type, SUM(amount) AS totalAmount FROM 
@@ -45,7 +48,7 @@ export const getDashboard = async (req, res) => {
         const transactions = transactionsResult.rows;
     
         transactions.forEach((transaction) => {
-          if (transaction.type === "Income") {
+          if (transaction.type === "Income" ) {
             totalIncome += transaction.totalamount;
           } else {
             totalExpense += transaction.totalamount;
@@ -107,9 +110,10 @@ export const getDashboard = async (req, res) => {
         const lastAccount = lastAccountResult.rows;
     
         res.status(200).json({
+
           availableBalance,
-          totalIncome,
-          totalExpense,
+          totalIncome:Number(totalIncome),
+          totalExpense:Number(totalExpense),
           chartData: data,
           lastTransactions,
           lastAccount,
@@ -258,3 +262,12 @@ export const transferMoneyBwAccount = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const generateDummyData =async()=>{
+      try {
+        
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+      }
+}

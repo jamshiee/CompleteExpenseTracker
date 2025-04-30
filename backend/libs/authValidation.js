@@ -21,9 +21,10 @@ export const comparePassword = async (userPass,pass)=>{
 }
 
 export const createJwt = (userId,res) =>{
-    const jwtSign = jwt.sign({userId},process.env.JWT_SECRET,{expiresIn:"1hr"})
+    const jwtSign = jwt.sign({userId},process.env.JWT_SECRET,{expiresIn:"1d"})
 
-    res.cookie('jwt',jwtSign)
+    res.cookie('jwt',jwtSign,)
+
 
       return jwtSign
 }

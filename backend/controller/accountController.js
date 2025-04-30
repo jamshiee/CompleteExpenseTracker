@@ -59,15 +59,15 @@ export const createAccount = async (req, res) => {
       values: [
         userId,
         description,
-        "income",
-        "completed",
+        "Income",
+        "Completed",
         amount,
         account.account_name,
       ],
     });
 
     res.status(200).json({
-      message: account.account_name + "Account created successfully",
+      message: account.account_name + " Account created successfully",
       data: account,
     });
   } catch (error) {
@@ -99,14 +99,14 @@ export const addMoney = async (req, res) => {
         userId,
         description,
         "Income",
-        "completed",
+        "Completed",
         amount,
         account.account_name,
       ],
     });
 
     res.status(200).json({
-      message: account.account_name + "Account created successfully",
+      message: "₹"+  amount + " credited to " +account.account_name  ,
       data: account,
     });
   } catch (error) {

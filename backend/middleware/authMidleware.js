@@ -6,6 +6,7 @@ dotenv.config();
 const authMiddleware = async (req, res, next) => {
   const authHeader = req?.headers?.cookie;
 
+
   if (!authHeader || !authHeader?.startsWith("jwt")) {
     return res.status(401).json({
       message: "Authentication failed",
@@ -13,7 +14,9 @@ const authMiddleware = async (req, res, next) => {
   }
 
   const token = authHeader?.split("=")[1];
-  console.log(token)
+  
+
+
 //   const authHeader = req?.headers?.authorization;
 
 //   if (!authHeader || !authHeader?.startsWith("Bearer")) {
@@ -34,7 +37,7 @@ const authMiddleware = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     return res.status(401).json({
-      message: "Authentication Failed",
+      message: "Authentication Internal Failed",
     });
   }
 };

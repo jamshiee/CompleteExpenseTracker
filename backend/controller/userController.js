@@ -76,7 +76,7 @@ export const changePassword = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { userId } = req.user;
-  const { firstname, lastname, country, currency, contact } = req.body;
+  const { firstname, lastname,  contact } = req.body;
   try {
     const userExists = await db.query({
       text: "SELECT * FROM tbluser WHERE id = $1",
@@ -92,15 +92,18 @@ export const updateUser = async (req, res) => {
     }
 
     const updatedUser = await db.query({
-      text: "UPDATE tbluser SET firstname = $1,lastname =$2,country=$3,currency=$4,contact=$5, updatedAt = CURRENT_TIMESTAMP WHERE id = $6 RETURNING *",
-      values: [firstname, lastname, country, currency, contact, userId],
+      text: "UPDATE tbluser SET firstname = $1,lastname =$2,contact=$3, updatedAt = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *",
+      values: [firstname, lastname,  contact, userId],
     });
 
     updatedUser.rows[0].password = undefined;
 
+    console.log(updatedUser.rows[0])
+
     res.status(200).json({
       message: "User updated successfully",
       user: updatedUser.rows[0],
+      
     });
   } catch (error) {
     console.log(error);
