@@ -1,9 +1,11 @@
-### exp - CompleteExpenseTracker
+# exp - CompleteExpenseTracker
 
 CompleteExpenseTracker is a full-stack expense tracking web application that allows users to manage up to four financial accounts, automatically logs transactions, and provides charts for visualizing spending and income. The application is deployed with Netlify (frontend) and Render (backend).
 
 Live Application:
 ### https://harmonious-cascaron-35fd5b.netlify.app
+
+------------------------------------------------------------------------------------------------
 
 ### Features:
 
@@ -12,6 +14,8 @@ Live Application:
 * Automatically creates transactions when funds are added or spent
 * Dashboard includes pie and line charts for income and expenses (via Recharts)
 * Frontend state managed using Zustand
+
+  ------------------------------------------------------------------------------------------------
 
 ### Technologies Used:
 
@@ -31,9 +35,7 @@ Live Application:
 * Bcrypt for password hashing
 * Deployed on Render
 
-Here's a concise **Database Overview** section based on your PostgreSQL schema:
-
----
+------------------------------------------------------------------------------------------------
 
  ### Database Overview (PostgreSQL):
 
@@ -69,15 +71,15 @@ Logs financial transactions.
 - `type`: `'Income'` or `'Expense'` (default `'Income'`)
 - `createdAt`, `updatedAt`: Timestamps for record history
 
----
+------------------------------------------------------------------------------------------------
 
-# .env file
+### .env file
 
-# Server Port
+### Server Port
 PORT=5000
 
-# JWT Secret Key for authentication
+### JWT Secret Key for authentication
 JWT_SECRET=your_jwt_secret_key
 
-# PostgreSQL Database URL
+### PostgreSQL Database URL
 DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database_name>
