@@ -1,3 +1,7 @@
+<div align="center">
+<img src="frontend/public/logo.png" alt="CompleteExpenseTracker Logo" width="400"/>
+</div>
+
 # exp - CompleteExpenseTracker
 
 CompleteExpenseTracker is a full-stack expense tracking web application that allows users to manage up to four financial accounts, automatically logs transactions, and provides charts for visualizing spending and income. The application is deployed with Netlify (frontend) and Render (backend).
