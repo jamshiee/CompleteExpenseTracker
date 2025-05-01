@@ -18,6 +18,7 @@ dist-ssr
 .idea
 .DS_Store
 .env
+node_modules
 *.env
 *.suo
 *.ntvs*
