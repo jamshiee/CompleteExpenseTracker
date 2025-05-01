@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 app.use(cors({
-    origin: "http://localhost:5174", 
+    origin: "https://harmonious-cascaron-35fd5b.netlify.app", 
   credentials: true 
 }));
 app.use(cookieParser())
